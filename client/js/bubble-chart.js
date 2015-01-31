@@ -101,8 +101,9 @@ BubbleChart = function(domId, graph) {
   });
 
   node.on('click', function() {
-    var selectedLocationCode = d3.select(this).data()[0].group;
-    Session.set('selected_location_code', selectedLocationCode);
+    var d = d3.select(this).data()[0];
+    Session.set('selected_location_code', d.group);
+    Session.set('selected_location_name', d.name);
   });
 
   $('svg circle').tipsy({

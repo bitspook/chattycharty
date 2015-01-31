@@ -1,7 +1,3 @@
-function getRandomColor () {
-
-}
-
 Meteor.methods({
   getChatGraph: function(searchTerm, limit) {
     limit = limit || 100;
@@ -37,5 +33,25 @@ Meteor.methods({
     });
 
     return graph;
+  },
+  getChatGrapForLocationCode: function(locationCode) {
+    var fromDates = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var toDates = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    Chats.find({location_code: locationCode}).forEach(function(loc) {
+      var fromDate = loc.from_date ? loc.from_date.split('/')[1] : null,
+          toDate = loc.to_date ? loc.to_date.split('/')[1] : null;
+
+      if (fromDate) {
+        fromDates[fromDate-1] += 1;
+      }
+      if (toDate) {
+        fromDates[toDate-1] += 1;
+      }
+    });
+
+    return _.map(fromDates, function(freq, i) {
+      return [i+1, freq];
+    });
   }
 });

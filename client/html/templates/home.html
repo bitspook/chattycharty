@@ -28,6 +28,23 @@
 
   <div class="content">
     <style>
+     .axis path,
+     .axis line {
+       fill: none;
+       stroke: #000;
+       shape-rendering: crispEdges;
+     }
+
+     .x.axis path {
+       display: none;
+     }
+
+     .line {
+       fill: none;
+       stroke: steelblue;
+       stroke-width: 1.5px;
+     }
+
      .node {
        stroke: #fff;
        stroke-width: 1.5px;
@@ -38,7 +55,23 @@
      }
     </style>
 
-    <div id="graph" style="height:80vh; width:60%"></div>
+    <div id="bubble-graph" style="height:80vh; width:55%; float:left"></div>
+    <div id="line-chart" style="height:80vh; width:45%;float:right"></div>
+
+    <h3 class="loc-name">{{selected_location_name}}</h3>
+
+    <!--post modal-->
+    <div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body">
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </template>

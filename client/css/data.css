@@ -17,3 +17,14 @@ th {
   max-height: 90vh;
   overflow: scroll;
 }
+
+svg circle {
+  cursor: pointer;
+}
+
+.loc-name {
+  float: right;
+  position: absolute;
+  bottom: 30px;
+  right: 20%;
+}
