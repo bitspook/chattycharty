@@ -105,6 +105,15 @@ BubbleChart = function(domId, graph) {
     Session.set('selected_location_code', selectedLocationCode);
   });
 
+  $('svg circle').tipsy({
+    gravity: 'w',
+    html: true,
+    title: function() {
+      var d = this.__data__, c = d.name;
+      return c;
+    }
+  });
+
   return {
     force: force,
     svg: svg,
