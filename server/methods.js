@@ -38,16 +38,22 @@ Meteor.methods({
     var fromDates = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var toDates = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    Chats.find({location_code: locationCode}).forEach(function(loc) {
-      var fromDate = loc.from_date ? loc.from_date.split('/')[1] : null,
-          toDate = loc.to_date ? loc.to_date.split('/')[1] : null;
+    var chats = {};
+
+    Chats.find({location_code: locationCode}).forEach(function(chat) {
+      var fromDate = chat.from_date ? chat.from_date.split('/')[1] : null;
 
       if (fromDate) {
-        fromDates[fromDate-1] += 1;
+        if(chats[chat.chat_id] && chats[chat.chat_id].length)
+          chats[chat.chat_id].push(fromDate);
+        else chats[chat.chat_id] = [fromDate];
       }
-      if (toDate) {
-        fromDates[toDate-1] += 1;
-      }
+    });
+
+    _.each(_.keys(chats), function(key) {
+      _.each(_.uniq(chats[key]), function(month, i) {
+        fromDates[month] += 1;
+      });
     });
 
     return _.map(fromDates, function(freq, i) {
