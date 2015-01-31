@@ -10,5 +10,14 @@ Meteor.publish('chats', function(limit) {
 });
 
 Meteor.publish('chat_with_id', function(chatId) {
-  return Chats.find({chat_id: chatId});
+  var locationContext = Chats.findOne({chat_id: chatId}, {fields: {'chat_location_context': 1}}).chat_location_context,
+      locationCode = parseInt(locationContext.split(':')[0]);
+
+  var res = [Chats.find({chat_id: chatId})];
+
+  if (!_.isNaN((locationCode)) && _.isNumber(locationCode)) {
+    res.push(Locations.find({code: locationCode+''}));
+  }
+
+  return res;
 });
