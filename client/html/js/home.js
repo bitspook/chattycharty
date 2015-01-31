@@ -1,5 +1,5 @@
 Template.home.rendered = function() {
-  Meteor.call('getChatGraph', '', 40, function(err, graph) {
+  Meteor.call('getChatGraph', '', 140, function(err, graph) {
     if (err) {
       throw err;
     }
@@ -13,10 +13,6 @@ Template.home.events({
     Meteor.call('getChatGraph', e.currentTarget.value, 0, function(err, graph) {
       document.getElementById("graph").innerHTML = '';
       bubbleChart = new BubbleChart('graph', graph);
-
-      if (bubbleChart.nodes().length < 20) {
-        bubbleChart.charge(-(Math.pow(bubbleChart.nodes().length, 3.0))).start();
-      }
     });
   }
 });

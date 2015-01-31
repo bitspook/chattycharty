@@ -23,7 +23,8 @@ Meteor.methods({
         locationMap[chat.location] = {
           name: chat.location,
           freq: 1,
-          group: chat.location_code
+          group: chat.location_code,
+          location_code: chat.location_code
         };
       } else {
         locationMap[chat.location]['freq'] += 1;
@@ -31,7 +32,7 @@ Meteor.methods({
     });
 
     _.each(_.keys(locationMap), function(key) {
-      locationMap[key]['radius'] = locationMap[key]['freq'] * 10;
+      locationMap[key]['radius'] = Math.min(100, locationMap[key]['freq'] * 5);
       graph.nodes.push(locationMap[key]);
     });
 
