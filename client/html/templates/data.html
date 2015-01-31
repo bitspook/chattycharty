@@ -1,0 +1,35 @@
+<template name="data">
+  <div class="chat-id-sidebar col-md-3 pull-left">
+    <ul class="list-group">
+      {{#each chats}}
+      <li class="list-group-item chat-id" data-id={{this}}>{{this}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="chat-details col-md-9 pull-right">
+    <div class="panel panel-default">
+      <table class="table-bordered">
+        <thead>
+          <th>Message</th>
+          <th>Time</th>
+          <th>Location</th>
+        </thead>
+        <tbody>
+          {{#unless selected_chat}}
+          Select a Chat Id.
+          {{/unless}}
+
+          {{#each selected_chat}}
+          <tr class="chat-message">
+            <td>{{nl2br message}}</td>
+            <td>{{date timestamp}}</td>
+            <td>{{chat_location_context}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</template>

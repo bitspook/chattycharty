@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "babyparse": {
+      "version": "0.4.1"
+    },
+    "lazy.js": {
+      "version": "0.4.0"
+    }
+  }
+}

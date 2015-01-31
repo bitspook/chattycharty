@@ -1,0 +1,12 @@
+.chat-id-sidebar {
+  text-align: center;  
+  cursor: pointer;
+}
+
+.chat-id-sidebar ul li:hover {
+  background: rgba(248, 248, 250, 1);
+}
+
+th {
+  padding: 15px;
+}
