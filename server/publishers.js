@@ -21,3 +21,13 @@ Meteor.publish('chat_with_id', function(chatId) {
 
   return res;
 });
+
+Meteor.publish('valid_chats', function(limit) {
+  limit = limit || 100;
+
+  var validChats = Chats.find({
+    location: {$ne: null, $exists: true}
+  }, {limit: limit});
+
+  return validChats;
+});

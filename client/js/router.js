@@ -6,6 +6,10 @@ Router.configure({
 Router.map(function() {
   this.route('home', {
     path: '/',
+    waitOn: function() {
+      // Session.setDefault('valid_chats_limit', 5);
+      // return Meteor.subscribe('valid_chats', Session.get('valid_chats_limit'));
+    },
     template: 'home'
   });
 

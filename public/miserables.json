@@ -1,0 +1,16 @@
+{
+  "nodes":[
+    {"name":"Myriel","group":1, "radius": 50},
+    {"name":"Napoleon","group":2, "radius": 50},
+    {"name":"Mlle.Baptistine","group":3, "radius": 50},
+    {"name":"Mme.Magloire","group":4, "radius": 50},
+    {"name":"CountessdeLo","group":5, "radius": 50},
+    {"name":"Geborand","group":7, "radius": 50}
+  ],
+  "links":[
+    {"source":1,"target":0,"value":1},
+    {"source":2,"target":0,"value":8},
+    {"source":3,"target":0,"value":10},
+    {"source":3,"target":2,"value":6}
+  ]
+}
