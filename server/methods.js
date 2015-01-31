@@ -52,7 +52,7 @@ Meteor.methods({
 
     _.each(_.keys(chats), function(key) {
       _.each(_.uniq(chats[key]), function(month, i) {
-        fromDates[month] += 1;
+        fromDates[month-1] += 1;
       });
     });
 
