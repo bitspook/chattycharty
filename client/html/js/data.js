@@ -19,5 +19,7 @@ Template.data.events({
 
     Meteor.subscribe('chat_with_id', chatId);
     Session.set('selected_chat_id', chatId);
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 });

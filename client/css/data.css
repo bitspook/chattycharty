@@ -1,6 +1,8 @@
 .chat-id-sidebar {
   text-align: center;  
   cursor: pointer;
+  max-height: 90vh;
+  overflow: scroll;
 }
 
 .chat-id-sidebar ul li:hover {
@@ -9,4 +11,9 @@
 
 th {
   padding: 15px;
+}
+
+.chat-details {
+  max-height: 90vh;
+  overflow: scroll;
 }
