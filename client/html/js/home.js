@@ -27,6 +27,9 @@ Template.home.events({
       document.getElementById("bubble-graph").innerHTML = '';
       bubbleChart = new BubbleChart("bubble-graph", graph);
     });
+  },
+  'click .navbar-brand': function() {
+    Session.set('showing_top_10', false);
   }
 });
 
