@@ -71,5 +71,42 @@ Meteor.methods({
     return _.map(fromDates, function(freq, i) {
       return [i+1, freq];
     });
+  },
+  getTop10Locations: function() {
+    var allLocations = {};
+    ChatCatalogue.find({location: {$ne: '', $exists: true}}, {fields: {location_code: 1}}).forEach(function(doc) {
+      if(typeof allLocations[doc.location_code] === 'undefined')
+        allLocations[doc.location_code] = 0;
+      else
+        allLocations[doc.location_code] += 1;
+    });
+
+    var sortable = [];
+    for (var loc in allLocations)
+      sortable.push([loc, allLocations[loc]]);
+    sortable.sort(function(a, b) {return a[1] - b[1];});
+
+    var top10Arr = sortable.slice(Math.max(sortable.length - 11, 1));
+    var top10 = {};
+
+    _.each(top10Arr, function(arr) {
+      if (arr[0] == 'null') return;
+      top10[arr[0]] = arr[1];
+    });
+
+    var graph = { nodes: []};
+    _.each(_.keys(top10), function(top) {
+      var name = ChatCatalogue.findOne({
+        location_code: top
+      }).location;
+
+      graph.nodes.push({
+        name: name,
+        radius: top10[top] * 5,
+        group: top
+      });
+    });
+
+    return graph;
   }
 });
