@@ -1,5 +1,5 @@
 Template.home.rendered = function() {
-  Meteor.call('getChatGraph', '', 340, function(err, graph) {
+  Meteor.call('getChatGraph', '', 240, function(err, graph) {
     if (err) {
       throw err;
     }

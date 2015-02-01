@@ -12,6 +12,8 @@ Meteor.methods({
 
     var locationMap = {};
 
+    var normalizeChatsColl = {};
+
     var validChats = Chats.find({
       location: regex
     }, {limit: limit}).forEach(function(chat) {
@@ -22,9 +24,19 @@ Meteor.methods({
           group: chat.location_code,
           location_code: chat.location_code
         };
-      } else {
-        locationMap[chat.location]['freq'] += 1;
       }
+      if (normalizeChatsColl && normalizeChatsColl.length) {
+        normalizeChatsColl[chat.chat_id].push(chat.location);
+      }
+      else {
+        normalizeChatsColl[chat.chat_id] = [chat.location];
+      }
+    });
+
+    _.each(_.keys(normalizeChatsColl), function(key) {
+      _.each(_.uniq(normalizeChatsColl[key]), function(loc) {
+        locationMap[loc].freq += 1;
+      });
     });
 
     _.each(_.keys(locationMap), function(key) {

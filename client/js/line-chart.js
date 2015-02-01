@@ -43,7 +43,12 @@ LineChart = function(domId, rawData) {
   svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .call(xAxis)
+    .append("text")
+    .style("text-anchor", "end")
+    .attr("x", 0)
+    .attr("y", 30)
+    .text("Month");
 
   svg.append("g")
     .attr("class", "y axis")
